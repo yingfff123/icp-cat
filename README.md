@@ -8,7 +8,7 @@
   <img
     src="https://github.com/user-attachments/assets/82125cd0-8dee-4c72-af60-7cd912a41cf6"
     alt="ICP 备案资产提取器界面预览"
-    width="960"
+    width="760"
   />
 </p>
 
