@@ -53,6 +53,17 @@
 >
 > 注意 2：当前版本暂不支持小程序 / APP 相关资产的提取，仅支持域名与 IP 地址提取。
 
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/26aef8b3-276c-4fae-8fb0-7d430df3708f"
+    alt="备案查询分页累计提取示意图"
+    width="720"
+  />
+</p>
+
+<p align="center"><sub>通过点击页码可持续累计提取结果</sub></p>
+
+
 ## 工作原理
 
 扩展由 4 个主要部分组成：
