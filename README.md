@@ -31,38 +31,6 @@
 
 - `https://beian.miit.gov.cn/`
 
-当前重点监听的接口：
-
-```text
-POST /icpproject_query/api/icpAbbreviateInfo/queryByCondition
-Host: hlwicpfwc.miit.gov.cn
-```
-
-以及详情接口：
-
-```text
-POST /icpproject_query/api/icpAbbreviateInfo/queryDetailByAppAndMiniId
-Host: hlwicpfwc.miit.gov.cn
-```
-
-## 工作原理
-
-扩展由 4 个主要部分组成：
-
-- `manifest.json`
-  - 定义扩展权限、注入规则和弹窗入口
-- `content.js`
-  - 注入页面脚本 `injected.js`
-  - 接收页面通过 `window.postMessage` 发出的数据
-  - 将响应数据转发到后台
-- `injected.js`
-  - 运行在页面上下文中
-  - 重写 `window.fetch` 与 `XMLHttpRequest`，拦截目标接口响应
-- `background.js`
-  - 接收响应数据
-  - 提取域名/IP
-  - 去重后写入 `chrome.storage.local`
-
 ## 安装方式
 
 1. 打开 Chrome 扩展管理页面：`chrome://extensions/`
@@ -85,22 +53,23 @@ Host: hlwicpfwc.miit.gov.cn
 >
 > 注意 2：当前版本暂不支持小程序 / APP 相关资产的提取，仅支持域名与 IP 地址提取。
 
-## 当前提取规则
+## 工作原理
 
-扩展会优先从接口返回内容中识别：
+扩展由 4 个主要部分组成：
 
-- 形如 `example.com` 的域名
-- 形如 `1.2.3.4` 的 IPv4 地址
-- URL 中携带的主机名
-- 带端口的主机，如 `example.com:443` 或 `1.2.3.4:8080`
-
-同时会对 `payload.params` 进行递归扫描，因此即使字段名变化，也不再局限于固定字段如：
-
-- `domain`
-- `host`
-- `website`
-- `url`
-- `serviceUrl`
+- `manifest.json`
+  - 定义扩展权限、注入规则和弹窗入口
+- `content.js`
+  - 注入页面脚本 `injected.js`
+  - 接收页面通过 `window.postMessage` 发出的数据
+  - 将响应数据转发到后台
+- `injected.js`
+  - 运行在页面上下文中
+  - 重写 `window.fetch` 与 `XMLHttpRequest`，拦截目标接口响应
+- `background.js`
+  - 接收响应数据
+  - 提取域名/IP
+  - 去重后写入 `chrome.storage.local``
 
 ## 法律声明
 
