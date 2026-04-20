@@ -4,9 +4,15 @@
 
 当前实现通过页面脚本注入的方式拦截 `fetch` / `XMLHttpRequest` 请求，不依赖 `chrome.debugger`。
 
-<img width="3018" height="1552" alt="image" src="https://github.com/user-attachments/assets/82125cd0-8dee-4c72-af60-7cd912a41cf6" />
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/82125cd0-8dee-4c72-af60-7cd912a41cf6"
+    alt="ICP 备案资产提取器界面预览"
+    width="960"
+  />
+</p>
 
-
+<p align="center"><sub>插件弹窗界面预览</sub></p>
 
 ## 功能特性
 
@@ -75,6 +81,10 @@ Host: hlwicpfwc.miit.gov.cn
 6. 如有多次查询或分页结果，扩展会自动累计并去重
 7. 可使用“复制”按钮导出当前标签页内容，或使用“清空”按钮重置结果
 
+> 注意 1：受工信部备案网站分页规则限制，单次通常最多只能返回 10 条备案资产。对于备案资产较多的目标，可以在查询结果页中继续点击不同页码，插件会自动累计后续页面中的域名与 IP 提取结果。
+>
+> 注意 2：当前版本暂不支持小程序 / APP 相关资产的提取，仅支持域名与 IP 地址提取。
+
 ## 当前提取规则
 
 扩展会优先从接口返回内容中识别：
@@ -91,73 +101,6 @@ Host: hlwicpfwc.miit.gov.cn
 - `website`
 - `url`
 - `serviceUrl`
-
-## 调试方法
-
-如果出现“一个域名或 IP 都提取不到”，优先检查调试日志。
-
-### 页面控制台日志
-
-在备案页面 DevTools Console 中，可看到类似日志：
-
-```text
-[ICP Extractor][content] 注入脚本已加载
-[ICP Extractor][injected] 注入成功
-[ICP Extractor][injected] 捕获 fetch 列表请求
-[ICP Extractor][injected] 列表响应已解析
-[ICP Extractor][content] 收到页面消息
-```
-
-这说明：
-
-- 内容脚本已注入
-- 页面脚本已注入
-- 目标请求已被拦截
-- 响应已成功传回内容脚本
-
-### 后台日志
-
-在扩展的 Service Worker 控制台中，可看到类似日志：
-
-```text
-[ICP Extractor][background] 收到响应消息
-[ICP Extractor][background] 提取完成
-[ICP Extractor][background] 合并后结果
-```
-
-这说明：
-
-- 后台已收到响应
-- 已完成提取
-- 已成功写入存储
-
-## 排查思路
-
-### 1. 页面有请求，但扩展没抓到
-
-通常是以下原因之一：
-
-- 请求发生在 iframe 中
-- 页面脚本未成功注入
-- 页面改用了不同的请求上下文
-
-当前版本已启用多 frame 注入，可优先观察页面控制台是否出现注入成功日志。
-
-### 2. 抓到了响应，但结果为空
-
-可能原因：
-
-- 响应结构变化
-- 数据被包在更深层对象中
-- 值不是标准 host，而是混合文本
-
-当前版本已使用递归扫描与正则识别，兼容性较旧版本更强。
-
-### 3. 开启监听前已经发起了查询
-
-扩展只会处理监听开启之后捕获到的响应。
-
-如果先查询、后开启监听，之前的请求结果不会自动补抓。
 
 ## 法律声明
 
