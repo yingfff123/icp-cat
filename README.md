@@ -4,6 +4,10 @@
 
 当前实现通过页面脚本注入的方式拦截 `fetch` / `XMLHttpRequest` 请求，不依赖 `chrome.debugger`。
 
+<img width="3018" height="1552" alt="image" src="https://github.com/user-attachments/assets/82125cd0-8dee-4c72-af60-7cd912a41cf6" />
+
+
+
 ## 功能特性
 
 - 监听工信部备案查询页面的接口响应
