@@ -1,5 +1,6 @@
 # ICP 备案资产提取器
 
+#更新：页面提取不足问题已修复
 一个基于 Chrome Manifest V3 的浏览器扩展，用于在工信部备案查询页面自动拦截接口响应，并提取其中的域名与 IP 地址。
 
 当前实现通过页面脚本注入的方式拦截 `fetch` / `XMLHttpRequest` 请求，不依赖 `chrome.debugger`。
